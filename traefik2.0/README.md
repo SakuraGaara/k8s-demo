@@ -1,5 +1,5 @@
 ### k8s版本v1.18.2
-k8s安装： ![master的工作流程图](https://ngames-dev.cn/2020/05/21/2020-05-21-kubeadm%E5%AE%89%E8%A3%85/)  
+k8s安装： [kubeadm安装k8s](https://ngames-dev.cn/2020/05/21/2020-05-21-kubeadm%E5%AE%89%E8%A3%85/)  
 
 ### 安装traefik2.0
 ```sh
