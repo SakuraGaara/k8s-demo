@@ -1,0 +1,43 @@
+### ingressroute
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-v1-path
+spec:
+  stripPrefix:
+    prefixes:
+    - /
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-v2-path
+spec:
+  stripPrefix:
+    prefixes:
+    - /v2
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: appv1v2
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`app.ngames-dev.cn`) && PathPrefix(`/`)
+    middlewares:
+    - name: strip-v1-path
+    services:
+    - kind: Service
+      name: appv1
+      port: 80
+  - kind: Rule
+    match: Host(`app.ngames-dev.cn`) && PathPrefix(`/v2`)
+    middlewares:
+    - name: strip-v2-path
+    services:
+    - kind: Service
+      name: appv2
+      port: 80
